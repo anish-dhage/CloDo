@@ -13,13 +13,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.353" />
 
     <EditText
         android:id="@+id/password_edit"
@@ -33,30 +33,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintTop_toBottomOf="@+id/username_edit"
+        app:layout_constraintVertical_bias="0.071" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="128dp"
         android:text="Login"
         android:textColorLink="#00BCD4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824" />
+        app:layout_constraintTop_toBottomOf="@+id/password_edit"
+        app:layout_constraintVertical_bias="0.724" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/login_button"
@@ -81,6 +82,22 @@
             android:checked="false"
             android:text="@string/login_as_organization"
             android:textSize="15dp" />
-    </RadioGroup>>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        app:layout_constraintVertical_bias="0.121" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
