@@ -3,7 +3,6 @@ package com.footech.clodo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 
 public class RegisterPage extends AppCompatActivity {
 
@@ -23,7 +23,6 @@ public class RegisterPage extends AppCompatActivity {
     private Button regButton;
     private FirebaseAuth firebaseAuth;
 
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class RegisterPage extends AppCompatActivity {
         regUsername = (EditText) findViewById(R.id.reg_username);
         regPassword = (EditText) findViewById(R.id.reg_password);
         firebaseAuth = FirebaseAuth.getInstance();
-        progressDialog = new ProgressDialog(this);
 
         regButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -53,24 +51,22 @@ public class RegisterPage extends AppCompatActivity {
             return;
         }
 
-        if(TextUtils.isEmpty(password)){
+        else if(TextUtils.isEmpty(password)){
             Toast.makeText(getApplicationContext(), "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        progressDialog.setMessage("Registering...");
-        progressDialog.show();
 
-        firebaseAuth.createUserWithEmailAndPassword(email,password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Could not Register", Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();finish();
+                        } else {
+                            FirebaseAuthException e = (FirebaseAuthException )task.getException();
+                            Toast.makeText(RegisterPage.this, "Failed Registration: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            return;
                         }
                     }
                 });
