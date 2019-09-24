@@ -16,13 +16,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterPage extends AppCompatActivity {
 
-    private EditText regUsername, regPassword;
+    private EditText regUsername, regPassword, regName, regPhone;
     private Button regButton;
+    private FirebaseDatabase firebaseDB;
     private FirebaseAuth firebaseAuth;
 
+    private DatabaseReference donorDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +36,31 @@ public class RegisterPage extends AppCompatActivity {
         regButton = (Button) findViewById(R.id.reg_button);
         regUsername = (EditText) findViewById(R.id.reg_username);
         regPassword = (EditText) findViewById(R.id.reg_password);
+        regName = (EditText) findViewById(R.id.reg_name);
+        regPhone = (EditText) findViewById(R.id.reg_phone);
+
+        firebaseDB = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+
+        donorDatabase = firebaseDB.getReference("Donor");
 
         regButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                String user_name = regName.getText().toString();
+                String phone_num = regPhone.getText().toString();
+                String id = donorDatabase.push().getKey();
+                String email = regUsername.getText().toString().trim();
+                if (!(TextUtils.isEmpty(user_name) && TextUtils.isEmpty(phone_num) && TextUtils.isEmpty(phone_num))){
+                    DonorDetails newDonor= new DonorDetails(email,id,user_name,phone_num);
+                    donorDatabase.child(id).setValue(newDonor);
+                    Toast.makeText(getApplicationContext(), "Donor Added", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Enter Details", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 register_to_database(regUsername.getText().toString().trim(), regPassword.getText().toString().trim());
 
 
