@@ -3,4 +3,9 @@
     <string name="login_as_donor">Login as Donor</string>
     <string name="login_as_organization">Login as Organization</string>
     <string name="init_text">HELLO SARANG</string>
+    <string name="register_as_organisation">Register as Organisation</string>
+    <string name="register_as_donor">Register as Donor</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>

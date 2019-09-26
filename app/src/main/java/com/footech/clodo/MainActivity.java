@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText username_edit;
     private EditText password_edit;
-    private Button login,register;
+    private Button login;
+    private TextView register_as_donor, register_as_organisation;
+    private RadioButton org_radio, donor_radio;
     FirebaseAuth mAuth;
 
     @Override
@@ -31,7 +35,11 @@ public class MainActivity extends AppCompatActivity {
         username_edit = (EditText) findViewById(R.id.username_edit);
         password_edit = (EditText) findViewById(R.id.password_edit);
         login = (Button) findViewById(R.id.login_button);
-        register = (Button) findViewById(R.id.register_button);
+        register_as_donor = (TextView) findViewById(R.id.reg_as_donor_text);
+        register_as_organisation = (TextView) findViewById(R.id.reg_as_org_text);
+        org_radio = (RadioButton) findViewById(R.id.organization_radio);
+        donor_radio = (RadioButton) findViewById(R.id.donor_radio);
+
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -42,10 +50,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
+        register_as_donor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent reg_intent = new Intent(getApplicationContext(),RegisterPage.class);
+                startActivity(reg_intent);
+            }
+        });
+
+        register_as_organisation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reg_intent = new Intent(getApplicationContext(),RegisterOrgPage.class);
                 startActivity(reg_intent);
             }
         });
@@ -67,10 +83,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(MainActivity.this, MainUserPage.class);
-                    startActivity(intent);
+                    if(donor_radio.isChecked()){
+                        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(MainActivity.this, MainUserPage.class);
+                        startActivity(intent);
+                    }
+                    else if(org_radio.isChecked()){
+
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Select an option (Organisation or Donor)", Toast.LENGTH_LONG).show();
+                    }
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
