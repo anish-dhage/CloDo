@@ -5,16 +5,17 @@ public class DonorDetails {
     String donor_id;
     String name;
     String phone;
-
+    String address;
     public DonorDetails(){
 
     }
 
-    public DonorDetails(String email_id, String donor_id, String name, String phone) {
+    public DonorDetails(String email_id, String donor_id, String name, String phone, String address) {
         this.email_id = email_id;
         this.donor_id = donor_id;
         this.name = name;
         this.phone = phone;
+        this.address = address;
     }
 
     public String getEmail_id() {
@@ -30,6 +31,10 @@ public class DonorDetails {
     }
 
     public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() {
         return phone;
     }
 }

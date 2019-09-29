@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterPage extends AppCompatActivity {
 
-    private EditText regUsername, regPassword, regName, regPhone;
+    private EditText regUsername, regPassword, regName, regPhone, regAddress;
     private Button regButton;
     private FirebaseDatabase firebaseDB;
     private FirebaseAuth firebaseAuth;
@@ -37,6 +37,7 @@ public class RegisterPage extends AppCompatActivity {
         regPassword = (EditText) findViewById(R.id.reg_password);
         regName = (EditText) findViewById(R.id.reg_name);
         regPhone = (EditText) findViewById(R.id.reg_phone);
+        regAddress = (EditText) findViewById(R.id.reg_address) ;
 
         firebaseDB = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -50,8 +51,9 @@ public class RegisterPage extends AppCompatActivity {
                 String phone_num = regPhone.getText().toString();
                 String id = donorDatabase.push().getKey();
                 String email = regUsername.getText().toString().trim();
+                String address = regAddress.getText().toString();
                 if (!(TextUtils.isEmpty(user_name) && TextUtils.isEmpty(phone_num) && TextUtils.isEmpty(phone_num))){
-                    DonorDetails newDonor= new DonorDetails(email,id,user_name,phone_num);
+                    DonorDetails newDonor= new DonorDetails(email,id,user_name,phone_num,address);
                     donorDatabase.child(id).setValue(newDonor);
                     Toast.makeText(getApplicationContext(), "Donor Added", Toast.LENGTH_SHORT).show();
                 }
@@ -89,12 +91,8 @@ public class RegisterPage extends AppCompatActivity {
                         } else {
                             FirebaseAuthException e = (FirebaseAuthException )task.getException();
                             Toast.makeText(RegisterPage.this, "Failed Registration: "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                            return;
                         }
                     }
                 });
-    }
-
-    public static class OrganisationDetails {
     }
 }
