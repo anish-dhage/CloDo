@@ -2,14 +2,12 @@ package com.footech.clodo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.R.layout;
 import android.os.Bundle;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,9 +20,11 @@ public class MainUserPage extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDB;
     private DatabaseReference orgDatabase;
-    private ListView lv1;
+    private RecyclerView rec_view;
+    AdapterOrganisation mAdapter;
 
-    ArrayList<String> list;
+
+    ArrayList<OrganisationDetails> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +33,24 @@ public class MainUserPage extends AppCompatActivity {
 
         firebaseDB = FirebaseDatabase.getInstance();
         orgDatabase = firebaseDB.getReference().child("Organisation");
-        lv1 = (ListView) findViewById(R.id.lv) ;
+        rec_view = (RecyclerView) findViewById(R.id.org_recycler_view) ;
 
         orgDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list = new ArrayList<String>();
+                list = new ArrayList<OrganisationDetails>();
                 for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren())
                 {
                     OrganisationDetails p = dataSnapshot1.getValue(OrganisationDetails.class);
-                    list.add(p.getName());
+                    list.add(p);
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,list);
-                lv1.setAdapter(adapter);
+                mAdapter = new AdapterOrganisation(list);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                rec_view.setLayoutManager(mLayoutManager);
+                rec_view.setItemAnimator(new DefaultItemAnimator());
+                rec_view.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override

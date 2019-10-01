@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView register_as_donor, register_as_organisation;
     private RadioButton org_radio, donor_radio;
     FirebaseAuth mAuth;
+    FirebaseDatabase mDatabase;
+    DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         donor_radio = (RadioButton) findViewById(R.id.donor_radio);
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void validate(String username, String password){
+    private void validate(final String username, String password){
         //Make Custom, fetch from Firebase
         if(TextUtils.isEmpty(username)){
             Toast.makeText(getApplicationContext(), "Enter Email", Toast.LENGTH_SHORT).show();
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
 
                     if(donor_radio.isChecked()){
+
                         Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(MainActivity.this, MainUserPage.class);

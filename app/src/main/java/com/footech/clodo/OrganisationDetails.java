@@ -2,7 +2,7 @@ package com.footech.clodo;
 
 public class OrganisationDetails {
     String email_id;
-    String donor_id;
+    String org_id;
     String name;
     String phone;
     String city;
@@ -11,9 +11,9 @@ public class OrganisationDetails {
 
     }
 
-    public OrganisationDetails(String email_id, String donor_id, String name, String phone, String city) {
+    public OrganisationDetails(String email_id, String org_id, String name, String phone, String city) {
         this.email_id = email_id;
-        this.donor_id = donor_id;
+        this.org_id = org_id;
         this.name = name;
         this.phone = phone;
         this.city = city;
@@ -24,7 +24,7 @@ public class OrganisationDetails {
     }
 
     public String getDonor_id() {
-        return donor_id;
+        return org_id;
     }
 
     public String getName() {
