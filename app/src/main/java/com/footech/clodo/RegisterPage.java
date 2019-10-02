@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,9 +53,10 @@ public class RegisterPage extends AppCompatActivity {
                 String id = donorDatabase.push().getKey();
                 String email = regUsername.getText().toString().trim();
                 String address = regAddress.getText().toString();
-                if (!(TextUtils.isEmpty(user_name) && TextUtils.isEmpty(phone_num) && TextUtils.isEmpty(phone_num))){
-                    DonorDetails newDonor= new DonorDetails(email,id,user_name,phone_num,address);
+                if (!(TextUtils.isEmpty(user_name) && TextUtils.isEmpty(phone_num) && TextUtils.isEmpty(email) && TextUtils.isEmpty(address))){
+                    DonorDetails newDonor= new DonorDetails(address,email,id,user_name,phone_num);
                     donorDatabase.child(id).setValue(newDonor);
+                    Log.i("Register",newDonor.getAddress());
                     Toast.makeText(getApplicationContext(), "Donor Added", Toast.LENGTH_SHORT).show();
                 }
                 else{

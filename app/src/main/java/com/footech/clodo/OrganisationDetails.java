@@ -1,6 +1,8 @@
 package com.footech.clodo;
 
-public class OrganisationDetails {
+import java.io.Serializable;
+
+public class OrganisationDetails implements Serializable {
     String email_id;
     String org_id;
     String name;

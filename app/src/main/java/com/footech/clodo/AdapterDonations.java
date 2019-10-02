@@ -10,20 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class AdapterOrganisation extends RecyclerView.Adapter<AdapterOrganisation.MyViewHolder> {
-    private ArrayList<OrganisationDetails> orgList;
+public class AdapterDonations extends RecyclerView.Adapter<AdapterDonations.MyViewHolder> {
+    private ArrayList<Donations> donList;
     private OnNoteListener mOnNoteListener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView org_name, org_phone, org_city;
+        public TextView donor_name, donor_phone, donor_city;
         OnNoteListener onNoteListener;
 
         public MyViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
-            org_name = (TextView) itemView.findViewById(R.id.name_org);
-            org_phone = (TextView) itemView.findViewById(R.id.phone_org);
-            org_city = (TextView) itemView.findViewById(R.id.city_org);
+            donor_name = (TextView) itemView.findViewById(R.id.donor_name);
+            donor_phone = (TextView) itemView.findViewById(R.id.donor_phone);
+            donor_city = (TextView) itemView.findViewById(R.id.donor_city);
             this.onNoteListener = onNoteListener;
 
             itemView.setOnClickListener(this);
@@ -35,8 +35,8 @@ public class AdapterOrganisation extends RecyclerView.Adapter<AdapterOrganisatio
         }
     }
 
-    public AdapterOrganisation(ArrayList<OrganisationDetails> orgList, OnNoteListener onNoteListener) {
-        this.orgList = orgList;
+    public AdapterDonations(ArrayList<Donations> donList, OnNoteListener onNoteListener) {
+        this.donList = donList;
         this.mOnNoteListener = onNoteListener;
 
     }
@@ -44,24 +44,22 @@ public class AdapterOrganisation extends RecyclerView.Adapter<AdapterOrganisatio
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.org_recycler_layout, parent, false);
-
-
+                .inflate(R.layout.adapter_donations, parent, false);
         return new MyViewHolder(itemView, mOnNoteListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        OrganisationDetails org_det = orgList.get(position);
-        holder.org_name.setText(org_det.getName());
-        holder.org_city.setText(org_det.getCity());
-        holder.org_phone.setText(org_det.getPhone());
+        Donations mdon = donList.get(position);
+        holder.donor_name.setText(mdon.getDonor_name());
+        holder.donor_city.setText(mdon.getDonor_email_id());
+        holder.donor_phone.setText(mdon.getDonor_phone());
 
     }
 
     @Override
     public int getItemCount() {
-        return orgList.size();
+        return donList.size();
     }
 
     public interface OnNoteListener{

@@ -1,21 +1,25 @@
 package com.footech.clodo;
 
-public class DonorDetails {
+import java.io.Serializable;
+
+public class DonorDetails implements Serializable {
     String email_id;
     String donor_id;
+    String address;
     String name;
     String phone;
-    String address;
+
     public DonorDetails(){
 
     }
 
-    public DonorDetails(String email_id, String donor_id, String name, String phone, String address) {
+    public DonorDetails(String myaddress, String email_id, String donor_id, String name, String phone) {
         this.email_id = email_id;
+        this.address = myaddress;
         this.donor_id = donor_id;
         this.name = name;
         this.phone = phone;
-        this.address = address;
+
     }
 
     public String getEmail_id() {
@@ -35,6 +39,6 @@ public class DonorDetails {
     }
 
     public String getAddress() {
-        return phone;
+        return address;
     }
 }

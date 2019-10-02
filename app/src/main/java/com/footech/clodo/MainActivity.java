@@ -94,10 +94,15 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(MainActivity.this, MainUserPage.class);
+                        intent.putExtra("email_id",username);
                         startActivity(intent);
                     }
                     else if(org_radio.isChecked()){
+                        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
 
+                        Intent intent = new Intent(MainActivity.this, OrganisationMainPage.class);
+                        intent.putExtra("email_id",username);
+                        startActivity(intent);
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Select an option (Organisation or Donor)", Toast.LENGTH_LONG).show();
