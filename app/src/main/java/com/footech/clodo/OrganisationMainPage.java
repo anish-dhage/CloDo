@@ -126,7 +126,7 @@ public class OrganisationMainPage extends AppCompatActivity {
                     public void onClick(View view) {
                         Toast.makeText(getApplicationContext(),"Accepted", Toast.LENGTH_SHORT).show();
                         DatabaseReference oldDonation = firebaseDB.getReference("Donation").child(myOrg.getName()).child(mDon.getId());
-                        DatabaseReference newDonation = firebaseDB.getReference("Accepted").child(myOrg.getName());
+                        DatabaseReference newDonation = firebaseDB.getReference("Accepted").child(myOrg.getName()).child(mDon.getId());
                         newDonation.setValue(mDon);
                         oldDonation.removeValue();
                         return;

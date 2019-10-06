@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,13 +27,39 @@ public class ShowAccepted extends AppCompatActivity {
 
     AdapterDonations mAdapter;
     ArrayList<Donations> list;
+    OrganisationDetails mOrg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_accepted);
 
+        Intent intent1 = getIntent();
+        mOrg =(OrganisationDetails) intent1.getSerializableExtra("Org");
+        String name = " ";
+        name = mOrg.getName();
+        Log.i("name1",mOrg.getName());
+        initDonations();
+    }
+
+    private void initRecyclerView(){
+
+        mAdapter = new AdapterDonations(list, new AdapterDonations.OnNoteListener() {
+            @Override
+            public void onNoteClick(int position) {
+                Donations mDon = list.get(position);
+                Toast.makeText(getApplicationContext(), mDon.getDonation(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        rec_view.setLayoutManager(mLayoutManager);
+        rec_view.setItemAnimator(new DefaultItemAnimator());
+        rec_view.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void initDonations(){
         firebaseDB = FirebaseDatabase.getInstance();
-        orgDatabase = firebaseDB.getReference().child("Accepted");
+        orgDatabase = firebaseDB.getReference().child("Accepted").child(mOrg.getName());
         rec_view = (RecyclerView) findViewById(R.id.accepted_recview) ;
 
         orgDatabase.addValueEventListener(new ValueEventListener() {
@@ -52,21 +79,5 @@ public class ShowAccepted extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void initRecyclerView(){
-
-        mAdapter = new AdapterDonations(list, new AdapterDonations.OnNoteListener() {
-            @Override
-            public void onNoteClick(int position) {
-                Donations mDon = list.get(position);
-                Toast.makeText(getApplicationContext(), mDon.getDonation(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        rec_view.setLayoutManager(mLayoutManager);
-        rec_view.setItemAnimator(new DefaultItemAnimator());
-        rec_view.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
     }
 }
