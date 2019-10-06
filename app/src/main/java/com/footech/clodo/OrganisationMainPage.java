@@ -1,6 +1,7 @@
 package com.footech.clodo;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,19 +36,21 @@ public class OrganisationMainPage extends AppCompatActivity {
     OrganisationDetails myOrg;
     String orgname = " ";
 
+    Button showAccepted;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organisation_main_page);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String org_email = intent.getStringExtra("email_id").trim();
         Log.i("name", org_email);
 
         rec_view = (RecyclerView) findViewById(R.id.donation_recview);
         firebaseDB = FirebaseDatabase.getInstance();
         donation = firebaseDB.getReference("Organisation");
-
+        showAccepted = (Button) findViewById(R.id.accepted_btn);
 
         Query query = donation.orderByChild("email_id").equalTo(org_email);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -64,6 +70,15 @@ public class OrganisationMainPage extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        showAccepted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(getApplicationContext(), ShowAccepted.class);
+                intent1.putExtra("Org",myOrg);
+                startActivity(intent1);
             }
         });
     }
@@ -94,8 +109,42 @@ public class OrganisationMainPage extends AppCompatActivity {
         mAdapter = new AdapterDonations(list, new AdapterDonations.OnNoteListener() {
             @Override
             public void onNoteClick(int position) {
-                Donations mOrg = list.get(position);
-                Toast.makeText(getApplicationContext(), mOrg.getDonation(), Toast.LENGTH_SHORT).show();
+                final Donations mDon = list.get(position);
+                //Toast.makeText(getApplicationContext(), mOrg.getDonation(), Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(OrganisationMainPage.this);
+                View mView = getLayoutInflater().inflate(R.layout.donation_dialog, null);
+                TextView donor_name = (TextView) mView.findViewById(R.id.donor_name);
+                TextView donor_address = (TextView) mView.findViewById(R.id.donor_address);
+                TextView donation = (TextView) mView.findViewById(R.id.donation);
+                Button reject_btn = (Button) mView.findViewById(R.id.reject_btn);
+                Button accept_btn = (Button) mView.findViewById(R.id.accept_btn);
+                donation.setText(mDon.getDonation());
+                donor_address.setText(mDon.getCity());
+                donor_name.setText(mDon.getDonor_name());
+                accept_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(),"Accepted", Toast.LENGTH_SHORT).show();
+                        DatabaseReference oldDonation = firebaseDB.getReference("Donation").child(myOrg.getName()).child(mDon.getId());
+                        DatabaseReference newDonation = firebaseDB.getReference("Accepted").child(myOrg.getName());
+                        newDonation.setValue(mDon);
+                        oldDonation.removeValue();
+                        return;
+                    }
+                });
+                reject_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Rejected", Toast.LENGTH_SHORT).show();
+                        DatabaseReference oldDonation = firebaseDB.getReference("Donation").child(myOrg.getName()).child(mDon.getId());
+                        oldDonation.removeValue();
+                        return;
+                    }
+                });
+
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
             }
         });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

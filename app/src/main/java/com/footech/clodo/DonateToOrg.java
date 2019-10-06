@@ -49,7 +49,7 @@ public class DonateToOrg extends AppCompatActivity {
                 DonorDetails mDon = (DonorDetails) intent.getSerializableExtra("DonorDet");
 
                 if (!(TextUtils.isEmpty(donationDet))){
-                    newDonation = new Donations(donationDet,mDon.getEmail_id(),mDon.getName(),mDon.getPhone(),mDon.getAddress());
+                    newDonation = new Donations(donationDet,mDon.getEmail_id(),mDon.getName(),mDon.getPhone(),mDon.getAddress(),id);
                     donationBase.child(mOrg.getName()).child(id).setValue(newDonation);
                     Toast.makeText(getApplicationContext(), "Donation Added", Toast.LENGTH_SHORT).show();
                     finish();
