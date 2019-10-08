@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,17 +30,28 @@ public class ShowAccepted extends AppCompatActivity {
     AdapterDonations mAdapter;
     ArrayList<Donations> list;
     OrganisationDetails mOrg;
+
+    Button clear_accepted;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_accepted);
 
         Intent intent1 = getIntent();
+        clear_accepted = (Button) findViewById(R.id.clear_accepted);
         mOrg =(OrganisationDetails) intent1.getSerializableExtra("Org");
         String name = " ";
         name = mOrg.getName();
         Log.i("name1",mOrg.getName());
         initDonations();
+
+        clear_accepted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                orgDatabase = FirebaseDatabase.getInstance().getReference().child("Accepted").child(mOrg.getName());
+                orgDatabase.removeValue();
+            }
+        });
     }
 
     private void initRecyclerView(){

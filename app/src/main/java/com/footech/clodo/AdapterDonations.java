@@ -16,14 +16,14 @@ public class AdapterDonations extends RecyclerView.Adapter<AdapterDonations.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView donor_name, donor_phone, donor_city;
+        public TextView donor_name, donor_phone, donor_email;
         OnNoteListener onNoteListener;
 
         public MyViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
             donor_name = (TextView) itemView.findViewById(R.id.donor_name);
             donor_phone = (TextView) itemView.findViewById(R.id.donor_phone);
-            donor_city = (TextView) itemView.findViewById(R.id.donor_city);
+            donor_email = (TextView) itemView.findViewById(R.id.donor_email);
             this.onNoteListener = onNoteListener;
 
             itemView.setOnClickListener(this);
@@ -52,7 +52,7 @@ public class AdapterDonations extends RecyclerView.Adapter<AdapterDonations.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Donations mdon = donList.get(position);
         holder.donor_name.setText(mdon.getDonor_name());
-        holder.donor_city.setText(mdon.getDonor_email_id());
+        holder.donor_email.setText(mdon.getDonor_email_id());
         holder.donor_phone.setText(mdon.getDonor_phone());
 
     }

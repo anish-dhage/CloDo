@@ -6,9 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainUserPage">
 
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List of Organisations :"
+        android:textColor="@color/backPurple"
+        android:textSize="30dp"
+        android:padding="20dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/org_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:layout_below="@+id/textView14"
+        android:scrollbars="vertical"
+        android:padding="10dp"/>
 </RelativeLayout>

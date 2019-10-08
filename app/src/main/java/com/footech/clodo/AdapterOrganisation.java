@@ -55,7 +55,7 @@ public class AdapterOrganisation extends RecyclerView.Adapter<AdapterOrganisatio
         OrganisationDetails org_det = orgList.get(position);
         holder.org_name.setText(org_det.getName());
         holder.org_city.setText(org_det.getCity());
-        holder.org_phone.setText(org_det.getPhone());
+        holder.org_phone.append(org_det.getPhone());
 
     }
 

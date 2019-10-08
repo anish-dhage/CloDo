@@ -24,6 +24,8 @@ public class DonateToOrg extends AppCompatActivity {
 
     private Donations newDonation;
 
+    TextView donorname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +33,12 @@ public class DonateToOrg extends AppCompatActivity {
 
         donation = (TextView) findViewById(R.id.donationDetails);
         donate_button = (Button) findViewById(R.id.donate_button);
+        donorname = (TextView) findViewById(R.id.textView13);
+
         Intent intent = getIntent();
         final OrganisationDetails mOrg =  (OrganisationDetails) intent.getSerializableExtra("OrgDet");
 
+        donorname.append(mOrg.getName());
         firebaseDB = FirebaseDatabase.getInstance();
         String orgEmail = mOrg.getEmail_id();
         donationBase = firebaseDB.getReference("Donation");

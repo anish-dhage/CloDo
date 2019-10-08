@@ -118,9 +118,9 @@ public class OrganisationMainPage extends AppCompatActivity {
                 TextView donation = (TextView) mView.findViewById(R.id.donation);
                 Button reject_btn = (Button) mView.findViewById(R.id.reject_btn);
                 Button accept_btn = (Button) mView.findViewById(R.id.accept_btn);
-                donation.setText(mDon.getDonation());
-                donor_address.setText(mDon.getCity());
-                donor_name.setText(mDon.getDonor_name());
+                donation.append(mDon.getDonation());
+                donor_address.append(mDon.getCity());
+                donor_name.append(mDon.getDonor_name());
                 accept_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -15,19 +15,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/backPurple"
+        android:text="testing"/>
 
     <TextView
         android:id="@+id/donor_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/donor_name" />
+        android:layout_below="@id/donor_name"
+        android:text="testing"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/donor_city"
+        android:id="@+id/donor_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/donor_phone" />
+        android:layout_below="@id/donor_phone"
+        android:text="testing"
+        android:textSize="17sp"
+        android:textColor="@color/darkGray"/>
 
 </RelativeLayout>

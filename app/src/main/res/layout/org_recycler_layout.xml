@@ -15,19 +15,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/backPurple"/>
 
     <TextView
         android:id="@+id/phone_org"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name_org" />
+        android:layout_below="@id/name_org"
+        android:text="Contact : "
+        android:textSize="17sp"/>
 
     <TextView
         android:id="@+id/city_org"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:textColor="@color/black"
+        android:textSize="15sp"/>
 
 </RelativeLayout>
