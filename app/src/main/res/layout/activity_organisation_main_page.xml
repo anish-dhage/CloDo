@@ -19,7 +19,7 @@
             android:padding="20dp"
             android:text="Pending Donations :"
             android:textColor="@color/backPurple"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <ScrollView
             android:layout_width="match_parent"

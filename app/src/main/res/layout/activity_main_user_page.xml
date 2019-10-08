@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="List of Organisations :"
         android:textColor="@color/backPurple"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:padding="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView

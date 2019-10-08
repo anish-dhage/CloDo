@@ -8,9 +8,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="87dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,14 +23,14 @@
                 android:padding="20dp"
                 android:text="Enter Details :"
                 android:textColor="@color/backPurple"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="Enter Email :"
                 android:textColor="@color/backPurple"/>
 
@@ -51,7 +49,7 @@
                 android:id="@+id/textView9"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="Enter Password :"
                 android:textColor="@color/backPurple" />
 
@@ -70,7 +68,7 @@
                 android:id="@+id/textView10"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="Enter Name :"
                 android:textColor="@color/backPurple" />
 
@@ -89,7 +87,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="Enter Phone Number :"
                 android:textColor="@color/backPurple"/>
 
@@ -107,7 +105,7 @@
                 android:id="@+id/textView12"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:text="Enter Address :"
                 android:textColor="@color/backPurple"/>
 
