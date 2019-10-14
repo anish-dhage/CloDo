@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,8 +18,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,18 +96,59 @@ public class MainActivity extends AppCompatActivity {
 
                     if(donor_radio.isChecked()){
 
-                        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
+                        DatabaseReference donor = FirebaseDatabase.getInstance().getReference().child("Donor");
+                        Query query = donor.orderByChild("email_id").equalTo(username);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (!dataSnapshot.exists()) {
+                                    Toast.makeText(getApplicationContext(), "Not a Donor", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(MainActivity.this, MainUserPage.class);
-                        intent.putExtra("email_id",username);
-                        startActivity(intent);
+                                    Intent intent = new Intent(MainActivity.this, MainUserPage.class);
+                                    intent.putExtra("email_id",username);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
                     }
                     else if(org_radio.isChecked()){
-                        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
 
-                        Intent intent = new Intent(MainActivity.this, OrganisationMainPage.class);
-                        intent.putExtra("email_id",username);
-                        startActivity(intent);
+                        DatabaseReference donor = FirebaseDatabase.getInstance().getReference().child("Organisation");
+                        Query query = donor.orderByChild("email_id").equalTo(username);
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (!dataSnapshot.exists()) {
+                                    Toast.makeText(getApplicationContext(), "Not a Organisation", Toast.LENGTH_LONG).show();
+
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
+
+                                    Intent intent = new Intent(MainActivity.this, OrganisationMainPage.class);
+                                    intent.putExtra("email_id",username);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Select an option (Organisation or Donor)", Toast.LENGTH_LONG).show();

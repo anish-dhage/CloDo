@@ -1,6 +1,7 @@
 package com.footech.clodo;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -60,7 +62,17 @@ public class ShowAccepted extends AppCompatActivity {
             @Override
             public void onNoteClick(int position) {
                 Donations mDon = list.get(position);
-                Toast.makeText(getApplicationContext(), mDon.getDonation(), Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ShowAccepted.this);
+                View mView = getLayoutInflater().inflate(R.layout.accepted_dialog, null);
+                TextView donor_name = (TextView) mView.findViewById(R.id.donor_name);
+                TextView donor_address = (TextView) mView.findViewById(R.id.donor_address);
+                TextView donation = (TextView) mView.findViewById(R.id.donation);
+                donation.append(mDon.getDonation());
+                donor_address.append(mDon.getCity());
+                donor_name.append(mDon.getDonor_name());
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
             }
         });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

@@ -78,7 +78,9 @@ public class OrganisationMainPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent1 = new Intent(getApplicationContext(), ShowAccepted.class);
                 intent1.putExtra("Org",myOrg);
-                startActivity(intent1);
+                if(myOrg != null){
+                    startActivity(intent1);
+                }
             }
         });
     }
