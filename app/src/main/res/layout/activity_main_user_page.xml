@@ -10,10 +10,11 @@
         android:id="@+id/textView14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="List of Organisations :"
-        android:textColor="@color/backPurple"
+        android:text="List of Organisations "
+        android:textColor="@color/white"
         android:textSize="30sp"
-        android:padding="20dp"/>
+        android:padding="20dp"
+        android:background="@color/backPurple"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/org_recycler_view"

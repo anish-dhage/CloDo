@@ -50,7 +50,7 @@
         android:layout_marginEnd="8dp"
         android:text="@string/login"
         android:textColorLink="#00BCD4"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         android:background="@drawable/button"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -120,15 +120,14 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clodo"
+        android:text="CLODO"
         android:textColor="@color/backPurple"
-        android:textSize="60dp"
-        android:textStyle="bold|italic"
+        android:textSize="50dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/username_edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.765" />
+        app:layout_constraintVertical_bias="0.853" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

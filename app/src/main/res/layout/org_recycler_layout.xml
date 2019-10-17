@@ -1,14 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="@drawable/adapter_background"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
     android:paddingBottom="10dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="10dp">
+    android:paddingTop="10dp"
+    android:layout_margin="10dp"
+    >
 
     <TextView
         android:id="@+id/name_org"
@@ -17,7 +19,8 @@
         android:layout_alignParentTop="true"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/backPurple"/>
+        android:textColor="@color/backPurple"
+        android:layout_marginLeft="15dp"/>
 
     <TextView
         android:id="@+id/phone_org"
@@ -25,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name_org"
         android:text="Contact : "
-        android:textSize="17sp"/>
+        android:textSize="17sp"
+        android:layout_marginLeft="15dp"/>
 
     <TextView
         android:id="@+id/city_org"
@@ -33,6 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:textColor="@color/black"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"/>
 
 </RelativeLayout>

@@ -3,14 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@color/yellow">
 
     <TextView
         android:id="@+id/donor_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name : "
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20sp"/>
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Address :"
         android:textStyle="normal"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:singleLine="false"
         android:textColor="@color/black"/>
 
@@ -30,5 +30,5 @@
         android:layout_height="wrap_content"
         android:text="Donation : "
         android:textColor="@color/black"
-        android:textSize="15sp"/>
+        android:textSize="20sp"/>
 </LinearLayout>

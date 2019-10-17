@@ -3,26 +3,28 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="@color/yellow">
 
     <TextView
         android:id="@+id/donor_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name : "
-        android:textStyle="bold"
         android:textColor="@color/black"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/donor_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Address :"
-        android:textStyle="normal"
-        android:textSize="15sp"
+        android:text="Address : "
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:singleLine="false"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        />
 
     <TextView
         android:id="@+id/donation"
@@ -30,7 +32,8 @@
         android:layout_height="wrap_content"
         android:text="Donation : "
         android:textColor="@color/black"
-        android:textSize="15sp"/>
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,9 +47,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Reject"
-            android:background="@drawable/button"
+            android:background="@color/backPurple"
             android:textColor="@color/white"
-            android:layout_margin="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="2dp"/>
 
         <Button
             android:id="@+id/accept_btn"
@@ -54,8 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Accept"
-            android:background="@drawable/button"
+            android:background="@color/backPurple"
             android:textColor="@color/white"
-            android:layout_margin="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="2dp"/>
     </LinearLayout>
 </LinearLayout>
