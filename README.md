@@ -1,3 +1,3 @@
 # CloDo
 
-### Refer to docx file for complete description
+### Refer to Clodo.docx file for complete description
